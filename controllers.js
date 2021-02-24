@@ -3,7 +3,7 @@ const Contact = require('./Contact')
 exports.getAllContact = (req, res) => {
     Contact.find()
         .then( contacts => {
-            res.json(contacts)
+            res.render('index', {contacts})
         })
         .catch( e => {
             console.log(e)

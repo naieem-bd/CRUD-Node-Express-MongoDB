@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+	<title>ejs</title>
+</head>
+
+<body>
+
+	<div class="container">
+		<h5>Create new contacts</h5>
+		<form action="/contacts" class="row row-cols mb-3" method="POST">
+			<div class="form-group col">
+				<input type="text" name="name" placeholder="Name" class="form-control">
+			</div>
+			<div class="form-group col">
+				<input type="text" name="phone" placeholder="Phone" class="form-control">
+			</div>
+			<div class="form-group col">
+				<input type="email" name="email" placeholder="Email" class="form-control">
+			</div>
+			<div class="form-group col">
+				<input type="hidden" name="id">
+			</div>
+		</form>
+
+		<div>
+			<h5>Contasts list</h5>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Name</th>
+						<th scope="col">Phone</th>
+						<th scope="col">Email</th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for(let contact of contacts) { %> 
+						<tr>
+							<td><%= contact.name %> </td>
+							<td><%= contact.phone %> </td>
+							<td><%= contact.email %> </td>
+							<td>
+								<button class="btn btn-worning btn-sm">Edit</button>
+								<a href="contacts/delete/<%= contact._id %>" class="btn btn-danger btn-sm">Delete</a>
+							</td>
+						</tr>
+					<% } %> 
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<!-- Optional JavaScript; choose one of the two! -->
+
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
