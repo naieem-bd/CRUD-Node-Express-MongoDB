@@ -1,5 +1,5 @@
 {
-  "name": "ejs-c8",
+  "name": "crud-node-express-mongodb",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/naieem-bd/ejs.git"
+    "url": "git+https://github.com/naieem-bd/CRUD-Node-Express-MongoDB.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/naieem-bd/ejs-c8/issues"
+    "url": "https://github.com/naieem-bd/CRUD-Node-Express-MongoDB/issues"
   },
-  "homepage": "https://github.com/naieem-bd/ejs-c8#readme",
+  "homepage": "https://github.com/naieem-bd/CRUD-Node-Express-MongoDB#readme",
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.1",
