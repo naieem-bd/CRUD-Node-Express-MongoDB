@@ -19,16 +19,26 @@
 		<h5>Create new contacts</h5>
 		<form action="/contacts" class="row row-cols mb-3" method="POST">
 			<div class="form-group col">
-				<input type="text" name="name" placeholder="Name" class="form-control">
+				<input type="text" name="name" placeholder="Name" class="form-control <%= error.name ? 'is-invalid' : '' %>">
+				<div class="invalid-feedback">
+					<%= error.name %> 
+				</div>
 			</div>
 			<div class="form-group col">
-				<input type="text" name="phone" placeholder="Phone" class="form-control">
+				<input type="text" name="phone" placeholder="Phone" class="form-control <%= error.phone ? 'is-invalid' : '' %>">
+				<div class="invalid-feedback">
+					<%= error.phone %> 
+				</div>
 			</div>
 			<div class="form-group col">
-				<input type="email" name="email" placeholder="Email" class="form-control">
-			</div>
-			<div class="form-group col">
+				<input type="email" name="email" placeholder="Email" class="form-control <%= error.email ? 'is-invalid' : '' %>">
+				<div class="invalid-feedback">
+					<%= error.email %> 
+				</div>
 				<input type="hidden" name="id">
+			</div>
+			<div class="form-group col">
+				<input type="submit" class="btn btn-primary" value="Submit">
 			</div>
 		</form>
 
@@ -50,7 +60,7 @@
 							<td><%= contact.phone %> </td>
 							<td><%= contact.email %> </td>
 							<td>
-								<button class="btn btn-worning btn-sm">Edit</button>
+								<button class="btn btn-warning btn-sm">Edit</button>
 								<a href="contacts/delete/<%= contact._id %>" class="btn btn-danger btn-sm">Delete</a>
 							</td>
 						</tr>

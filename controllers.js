@@ -3,7 +3,7 @@ const Contact = require('./Contact')
 exports.getAllContact = (req, res) => {
     Contact.find()
         .then( contacts => {
-            res.render('index', {contacts})
+            res.render('index', {contacts, error:{}})
         })
         .catch( e => {
             console.log(e)
@@ -29,7 +29,38 @@ exports.getSingleContact = (req, res) => {
 }
 
 exports.createContact = (req, res) => {
-    let { name, email, phone } = req.body
+    let { name, email, phone, id } = req.body
+
+    let error = {}
+
+    if(!name) {
+        error.name = 'please provide a name'
+    }
+
+    if(!phone) {
+        error.phone = 'please provide a number'
+    }
+
+    if(!email) {
+        error.email = 'please provide a valid email'
+    }
+
+    let isError = Object.keys(error).length > 0
+
+    if(isError) {
+        Contact.find()
+            .then(contacts => {
+                return res.render('index', {contacts, error})
+            })
+            .catch(e => {
+                console.log(e)
+                return res.json({
+                    message: 'something went wrong'
+                })                
+            })
+    }
+
+
     let contact = new Contact({
         name,
         email,
@@ -38,11 +69,14 @@ exports.createContact = (req, res) => {
 
     contact.save()
         .then( contact => {
-            res.json(contact)
+            Contact.find()
+                .then(contacts => {
+                    return res.render('index', {contacts, error: {}})
+                })
         })
         .catch( e => {
             console.log(e)
-            res.json({
+            return res.json({
                 message: 'something went wrong'
             })
         })
