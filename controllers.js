@@ -58,28 +58,29 @@ exports.createContact = (req, res) => {
                     message: 'something went wrong'
                 })                
             })
+    } else {
+        let contact = new Contact({
+            name,
+            email,
+            phone
+        })
+    
+        contact.save()
+            .then( contact => {
+                Contact.find()
+                    .then(contacts => {
+                        return res.render('index', {contacts, error: {}})
+                    })
+            })
+            .catch( e => {
+                console.log(e)
+                return res.json({
+                    message: 'something went wrong'
+                })
+            })
     }
 
 
-    let contact = new Contact({
-        name,
-        email,
-        phone
-    })
-
-    contact.save()
-        .then( contact => {
-            Contact.find()
-                .then(contacts => {
-                    return res.render('index', {contacts, error: {}})
-                })
-        })
-        .catch( e => {
-            console.log(e)
-            return res.json({
-                message: 'something went wrong'
-            })
-        })
 }
 
 exports.updateContact = (req, res) => {
