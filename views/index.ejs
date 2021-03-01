@@ -17,7 +17,7 @@
 
 	<div class="container">
 		<h5>Create new contacts</h5>
-		<form action="/contacts" class="row row-cols mb-3" method="POST">
+		<form action="/contacts" class="row row-cols mb-3" method="POST" id="contact-form">
 			<div class="form-group col">
 				<input type="text" name="name" placeholder="Name" class="form-control <%= error.name ? 'is-invalid' : '' %>">
 				<div class="invalid-feedback">
@@ -60,7 +60,15 @@
 							<td><%= contact.phone %> </td>
 							<td><%= contact.email %> </td>
 							<td>
-								<button class="btn btn-warning btn-sm">Edit</button>
+								<button 
+									class="btn btn-warning btn-sm edit-btn"
+									data-name="<%= contact.name %> "
+									data-phone="<%= contact.phone %> "
+									data-email="<%= contact.email %> "
+									data-id="<%= contact._id %> "
+								>
+									Edit
+								</button>
 								<a href="contacts/delete/<%= contact._id %>" class="btn btn-danger btn-sm">Delete</a>
 							</td>
 						</tr>
@@ -76,6 +84,24 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
 		crossorigin="anonymous"></script>
+
+	<script>
+		window.onload = function() {
+			let editBtn = document.getElementsByClassName('edit-btn');
+			let form = document.getElementById('contact-form');
+
+			[...editBtn].forEach(btn => {
+				btn.addEventListener('click', function(e) {
+					let {name, phone, email, id} = e.target.dataset
+					form[0].value = name
+					form[1].value = phone
+					form[2].value = email
+					form[3].value = id
+					form[4].value = 'Update'
+				})
+			})
+		}
+	</script>
 </body>
 
 </html>

@@ -58,6 +58,23 @@ exports.createContact = (req, res) => {
                     message: 'something went wrong'
                 })                
             })
+    } else if(id) {
+        Contact.findOneAndUpdate(
+            { _id: id},
+            { $set: {
+                name, email, phone
+            }}
+        ).then(() => {
+            Contact.find()
+                .then(contacts => {
+                    res.render('index', {contacts, error: {}})
+                })
+        }).catch(e => {
+            console.log(e)
+            return res.json({
+                message: 'something went wrong findOneAndUpdate'
+            })            
+        })
     } else {
         let contact = new Contact({
             name,
@@ -107,8 +124,11 @@ exports.updateContact = (req, res) => {
 exports.deleteContact = (req, res) => {
     let { id } = req.params
     Contact.findOneAndDelete({ _id : id })
-        .then( contact => {
-            res.json(contact)
+        .then( () => {
+            Contact.find()
+                .then(contacts => {
+                    res.render('index', {contacts, error: {}})
+                })
         })
         .catch( e => {
             console.log(e)
