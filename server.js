@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 2727
 
 mongoose
-    .connect('mongodb+srv://naieem:nai123456@cluster0.lsnb1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+    .connect('mongodb+srv://<db_username>:<db_password>@cluster0.lsnb1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
         useNewUrlParser: true, 
         useUnifiedTopology: true
     })
